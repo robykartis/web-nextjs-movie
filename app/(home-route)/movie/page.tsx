@@ -16,6 +16,9 @@ async function getData() {
             headers: {
                 accept: 'application/json',
                 Authorization: process.env.THEMOVIEDATABASE_API as string
+            },
+            next: {
+                revalidate: 10
             }
         }
     )
@@ -48,11 +51,14 @@ export default async function Movie() {
                                 </CardContent>
                             </Link>
                             <CardFooter>
-                                <h2 className="mb-3  text-lg font-semibold">
-                                    <Link href={`/movie/${movie.id}`}>
-                                        {movie.title}
-                                    </Link>
-                                </h2>
+                                <div className="flex flex-1 flex-col p-4 sm:p-6">
+                                    <h2 className="mb-3  text-lg font-semibold">
+                                        <Link href={`/movie/${movie.id}`} className=" transition dutation-100 hover:text-teal-500 active:text-teal-600">
+                                            {movie.title}
+                                        </Link>
+                                    </h2>
+                                    <p className="text-gray-500 line-clamp-3">{movie.overview}</p>
+                                </div>
                             </CardFooter>
                         </Card>
 
